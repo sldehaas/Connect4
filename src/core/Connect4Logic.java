@@ -2,67 +2,30 @@
  * Description for Connect4Logic
  *
  * @author Shane deHaas
- * @version 3.001
+ * @version 2.005
  *
  */
 
 package core;
-
-
-import static ui.Connect4TextConsole.printBoard;
+import ui.Connect4TextConsole;
 import java.util.Scanner;
-import ui.Connect4GUI;
-
-
-
+import java.util.Random;
 import core.Connect4ComputerPlayer;
 
+/**
+ * Importing printBoard method from Connect4TextConsole
+ *
+ */
+import static ui.Connect4TextConsole.printBoard;
 
-
-
-
-public class Connect4Logic{
+public class Connect4Logic {
     public static void main(String[] args) {
 
-
-
-        boolean useGUI = false;
-
-        String guiChoice = "";
-
-        System.out.println("Begin game. Enter 'T' if you want a text interface or 'G' if you want a graphics interface.");
-
-
-
-        while(!guiChoice.equals("G") && !guiChoice.equals("g") && !guiChoice.equals("T") && !guiChoice.equals("t")) {
-
-            Scanner inputGUI = new Scanner(System.in);
-            guiChoice = inputGUI.nextLine();
-            if (guiChoice.equals("G") || guiChoice.equals("g")) {
-                useGUI = true;
-                Connect4GUI.main(args);
-                break;
-            }
-            if (guiChoice.equals("T")|| guiChoice.equals("t")){
-                useGUI = false;
-                playGameText();
-                break;
-            }
-            System.out.println("Invalid input. Enter 'T' if you want a text interface or 'G' if you want a graphics interface.");
-
-        }
-
-
-
-
-
-    }
-
-    public static void playGameText(){
+        boolean gameOver = false;
         boolean compPlayer = false;
         String playerChoice = "";
-        boolean gameOver = false;
-        System.out.println("Enter 'P' if you want to play against a player, 'C' if you want to play against the computer");
+
+        System.out.println("Begin Game. Enter 'P' if you want to play against a player, 'C' if you want to play against the computer");
 
 
 
@@ -82,8 +45,6 @@ public class Connect4Logic{
 
         }
 
-
-
         char[][] board = new char[6][7];
 
         for(int i = 0; i < board.length; i++){
@@ -92,14 +53,8 @@ public class Connect4Logic{
             }
         }
 
-
         for(int i = 0; i<=42; i++){
-
             printBoard(board);
-
-
-
-
             gameOver = checkWinX(board);
             if(gameOver==true){
                 System.out.println("Player X won the game");
@@ -124,6 +79,8 @@ public class Connect4Logic{
                 board = dropPieceO(board, compPlayer);
             }
         }
+
+
     }
 
     /**
